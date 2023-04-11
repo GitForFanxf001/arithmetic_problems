@@ -1,0 +1,74 @@
+# include <iostream>
+using namespace std;
+# define M 6
+# define N 5
+
+//输出面板数字 
+void PrintPanal(int array[M][N]){
+	cout<<"游戏面板：" <<endl; 
+	for (int i = 0; i<M ;i++){
+		for(int j=0;j<N;j++){
+			cout<<array[i][j]<<" "; 
+		}
+		cout<<endl;
+	}
+} 
+
+//定义一个将改变颜色的函数 入参是入参是opt(表示行列)，x（表示序号），Ci（表示颜色），还有颜色板二维数组 
+void Play(int array[M][N],int opt,int index,int colori){
+	//如果opt = 0 就 就将第index行的颜色变为colori，如果等于1，就改变对应列的颜色。
+	if (opt==0){
+		// 修改第index行 
+		for(int i=0;i<N;i++){
+			array[index][i] = colori;
+		}
+	} else if(opt==1){
+		//修改第index列 
+		for(int i=0;i<M;i++){
+			array[i][index] = colori;
+		}
+	} else{
+		cout<<" args error please input 0 or 1 " ; 
+	} 
+}
+
+//涂色游戏，M行N列的二维数组一开始全部初始化为0，然后有 M+N个刷子， 
+int main(){
+	int panal[M][N] = {{0,0,0},{0,0,0},{0,0,0}};
+	PrintPanal(panal);
+	//先定义整体逻辑，输入1继续操作，输入0结束操作
+	char flag = 'y';
+	while(1){
+		cout<<" 输入y继续游戏，输入n结束游戏！ " ;
+		cin>>flag;
+		if (flag == 'n'){
+			break;
+		}else if(flag=='y'){
+			//进入操作逻辑
+			cout<<"操作逻辑！"<<endl; 
+			//定义一维数组，1-9表示9种颜色 
+			int color[10] = {1,2,3,4,5,6,7,8,9} ;
+			cout<<"请分别输入行列选择（0选择行，1选择列）、行列序号从0开始（行小于M,列小于N），和修改颜色1-9对应九种颜色"<<endl;
+			int opt,index,colors;
+			cout<<"行列？"<<endl; 
+			cin>>opt;
+			cout<<"序号？"<<endl;
+			cin>>index;
+			cout<<"颜色？"<<endl; 
+			cin>>colors;
+			Play(panal,opt,index,colors);
+			PrintPanal(panal);
+		}else{
+			cout<<"请输入y或者n"<<endl;
+		}
+	} 
+	return 0;
+}
+
+
+
+
+
+
+
+
